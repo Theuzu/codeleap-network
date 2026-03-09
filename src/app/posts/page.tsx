@@ -1,8 +1,13 @@
 "use client"
 import { getPosts } from '@/services/posts';
+import { useUserStore, } from '@/store/user';
 import { useQuery } from '@tanstack/react-query';
 
 export default function Example() {
+  const {username} = useUserStore();
+  console.log("user", username)
+
+
     const { data, isPending, isError } = useQuery({
         queryKey: ["posts"],
         queryFn: () => getPosts(),
@@ -18,6 +23,7 @@ export default function Example() {
     return (
         <div>
             <h1>All posts: {data.count}</h1>
+            <p>seu user: {username}</p>
             <ul>
 
                 {data.results.map((post) => (

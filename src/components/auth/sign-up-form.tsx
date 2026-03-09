@@ -7,27 +7,33 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input" 
-import { FieldValues, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { Label } from "../ui/label"
 import { signUpFormSchema, SignUpFormSchema,  } from "@/app/schemas/auth-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useUserStore } from "@/store/user"
+import router from "next/router"
 
 export function SignUpForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const {
+  const {addUsername} = useUserStore();
+
+const {
     register,
     handleSubmit,
     watch,
+    formState: { isValid }
   } = useForm<SignUpFormSchema>({
-    resolver: zodResolver(signUpFormSchema)
+    resolver: zodResolver(signUpFormSchema),
+    mode: "onChange" //Resolve while user is typing
   })
 
-  const username = watch("username", "")
+  const usernameValue = watch("username", "");
 
-  function onSubmit(payload: FieldValues) {
-    console.log("submit", payload)
+  function onSubmit(data: SignUpFormSchema) {
+    addUsername(data.username); //update store username
   }
 
   return (
@@ -56,10 +62,10 @@ export function SignUpForm({
             <div className="flex justify-end">
               <Button
                 type="submit"
-                disabled={!username.trim()}
+                disabled={!usernameValue.trim()}
                 className={cn(
                   "px-8 h-9 text-sm font-semibold transition-all duration-200",
-                  username.trim()
+                  usernameValue.trim()
                     ? "hover:bg-primary/80 cursor-"
                     : "bg-[#6e6e6e] text-white cursor-not-allowed"
                 )}

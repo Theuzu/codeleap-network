@@ -1,3 +1,4 @@
+import { useUserStore } from "@/store/user";
 import api from "./api";
 
 export type Post = {
