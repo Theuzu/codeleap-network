@@ -6,16 +6,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import {
-  Field,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-  FieldSeparator,
-} from "@/components/ui/field"
 import { Input } from "@/components/ui/input" 
 import { FieldValues, useForm } from "react-hook-form"
-import { Label } from "./ui/label"
+import { Label } from "../ui/label"
 import { signUpFormSchema, SignUpFormSchema,  } from "@/app/schemas/auth-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 
@@ -77,10 +70,6 @@ export function SignUpForm({
           </form>
         </CardContent>
       </Card>
-      {/* <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
-      </FieldDescription> */}
     </div>
   )
 }
