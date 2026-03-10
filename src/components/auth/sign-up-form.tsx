@@ -1,3 +1,5 @@
+"use client"
+
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -12,7 +14,7 @@ import { Label } from "../ui/label"
 import { signUpFormSchema, SignUpFormSchema,  } from "@/app/schemas/auth-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useUserStore } from "@/store/user"
-import router from "next/router"
+
 
 export function SignUpForm({
   className,
@@ -38,7 +40,7 @@ const {
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card className="w-full max-w-[500px] border border-[#CCCCCC] shadow-sm">
+      <Card className="w-full max-w-[500px] border border-foreground shadow-sm">
         <CardHeader className="px-6 pt-4 pb-1">
           <CardTitle className="font-bold text-xl">
             Welcome to CodeLeap Network!

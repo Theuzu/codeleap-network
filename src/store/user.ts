@@ -2,8 +2,9 @@ import {create} from "zustand"
 import { persist } from "zustand/middleware";
 
 type UserStore = {
-    username: string;
+    username: string | null;
     addUsername: (username: string) => void;
+    clearUsername: () => void;
 }
 
 export const useUserStore = create<UserStore>()(
@@ -11,7 +12,8 @@ export const useUserStore = create<UserStore>()(
     (set) => ({
       username: "",
       addUsername: (username: string) => set({ username }),
+      clearUsername: () => set({ username: null }),
     }),
-    { name: "user-storage" } // Nome da chave no localStorage
+    { name: "user-storage" } // Key name
   )
 )

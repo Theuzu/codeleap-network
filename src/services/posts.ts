@@ -1,6 +1,7 @@
 import { useUserStore } from "@/store/user";
 import api from "./api";
 
+
 export type Post = {
   id: number
   username: string
@@ -27,14 +28,17 @@ export type UpdatePostPayload = {
   content: string
 }
 
-// GET - infinite scroll
-export const getPosts = async (offset = 0, limit = 10): Promise<PaginatedResponse> => {
-  const { data } = await api.get<PaginatedResponse>('/', {
-    params: { limit, offset },
-  })
-  console.log(data)
-  return data
-}
+// GET -Infinte Scroll
+export const getPosts = async ({ pageParam = 0 }: { pageParam: number }): Promise<PaginatedResponse> => {
+  const limit = 10;
+  const response = await api.get<PaginatedResponse>('', {
+    params: {
+      limit,
+      offset: pageParam,
+    },
+  });
+  return response.data;
+};
 
 export const createPost = async (payload: CreatePostPayload): Promise<Post> => {
   const { data } = await api.post<Post>('/', payload)
