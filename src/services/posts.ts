@@ -41,7 +41,7 @@ export const getPosts = async ({ pageParam = 0 }: { pageParam: number }): Promis
 };
 
 export const createPost = async (payload: CreatePostPayload): Promise<Post> => {
-  const { data } = await api.post<Post>('/', payload)
+  const { data } = await api.post<Post>('', payload)
   return data
 }
 
