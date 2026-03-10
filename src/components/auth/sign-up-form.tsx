@@ -1,3 +1,11 @@
+/**
+ * The `SignUpForm` function is a React component that displays a form for users to
+ * sign up with a username, following Zod schema rules for validation.
+ * @param {SignUpFormSchema} data - The `data` parameter in the `onSubmit` function
+ * refers to the form data submitted by the user when they click the "ENTER" button
+ * in the sign-up form. In this case, the `data` object will contain the username
+ * entered by the user in the input field of the form.
+ */
 "use client"
 
 import { cn } from "@/lib/utils"

@@ -1,3 +1,11 @@
+/**
+ * The `useUpdatePost` function is a custom React Query hook in TypeScript that
+ * handles updating a post and managing the cache accordingly.
+ * @returns The `useUpdatePost` custom hook is being returned. This hook utilizes
+ * `useMutation` from `@tanstack/react-query` to handle updating a post. It
+ * includes mutation function, onMutate, onError, and onSettled callbacks to manage
+ * the update process and handle any errors that may occur.
+ */
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { updatePost, UpdatePostPayload, PaginatedResponse } from '@/services/posts'
 import { InfiniteData } from '@tanstack/react-query'
