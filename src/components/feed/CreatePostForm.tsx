@@ -27,7 +27,7 @@ export function CreatePostForm() {
         <PostForm
           onSubmit={onSubmit}
           isPending={isPending}
-          submitLabel="CREATE"
+          submitLabel="Create"
           pendingLabel="Creating..."
         />
       </CardContent>
