@@ -13,10 +13,11 @@ import { useForm } from "react-hook-form"
 import { Label } from "../ui/label"
 import { signUpFormSchema, SignUpFormSchema,  } from "@/app/schemas/auth-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from "next/navigation";
 import { useUserStore } from "@/store/user"
 
-
 export function SignUpForm({ className, ...props }: React.ComponentProps<"div">) {
+  const router = useRouter();
   const { addUsername } = useUserStore();
 
   const {
@@ -29,13 +30,14 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
     mode: "onChange", 
   });
 
-  function onSubmit(data: SignUpFormSchema) {
+function onSubmit(data: SignUpFormSchema) {
     addUsername(data.username);
+    router.push("/feed");
   }
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card className="w-full max-w-[500px] border border-foreground shadow-sm">
+      <Card className="w-full max-w-[500px] border shadow-sm">
         <CardHeader className="px-6 pt-4 pb-1">
           <CardTitle className="font-bold text-xl">
             Welcome to CodeLeap Network!
@@ -44,7 +46,7 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
         <CardContent className="px-6">
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="username" className="text-sm font-normal text-black">
+              <Label htmlFor="username" className="text-sm font-normal text-muted-foreground">
                 Please enter your username
               </Label>
               <Input
@@ -52,12 +54,11 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
                 type="text"
                 placeholder="John doe"
                 className={cn(
-                  "border-black h-10 px-3 text-sm placeholder:text-gray-500",
+                  " h-10 px-3 text-sm",
                   errors.username && "border-red-500" // Highlight field on error
                 )}
                 {...register("username")}
               />
-              {/* Display the Zod error message */}
               {errors.username && (
                 <span className="text-xs text-red-500">{errors.username.message}</span>
               )}
@@ -68,10 +69,10 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
                 type="submit"
                 disabled={!isValid} // Button follows Zod schema rules
                 className={cn(
-                  "px-8 h-9 text-sm font-semibold transition-all duration-200",
+                  "px-8 h-9 text-white text-sm font-semibold transition-all duration-200",
                   isValid
                     ? "hover:bg-primary/80"
-                    : "bg-[#6e6e6e] text-white cursor-not-allowed"
+                    : "bg-muted-foreground cursor-not-allowed"
                 )}
               >
                 ENTER

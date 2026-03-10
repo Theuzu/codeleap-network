@@ -28,16 +28,16 @@ export function DeleteModal({ post, onClose }: DeleteModalProps) {
 
   return (
     // Backdrop
-    <AlertDialog open={isOpen} onOpenChange={onClose}>
-        <AlertDialogContent>
+    <AlertDialog open={isOpen} onOpenChange={onClose} >
+        <AlertDialogContent className='min-w-fit'>
             <AlertDialogHeader>
               <AlertDialogTitle className="font-bold text-base">
                 Are you sure you want to delete this item?
               </AlertDialogTitle>
             </AlertDialogHeader>
             <div className="flex justify-end gap-3">
-              <AlertDialogCancel className='cursor-pointer'>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleConfirm}
+              <AlertDialogCancel className='cursor-pointer px-4'>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleConfirm} className='px-4'
               variant={"destructive"}>
                 {isPending ? 'Deleting...' : 'Delete'}
               </AlertDialogAction>

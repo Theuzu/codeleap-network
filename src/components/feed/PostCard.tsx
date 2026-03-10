@@ -2,6 +2,7 @@ import { Trash2, SquarePen } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { Post } from "@/services/posts";
 import { Button } from "../ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 type PostCardProps = {
   post: Post;
@@ -19,13 +20,12 @@ export function PostCard({
   const isOwner = post.username === currentUsername;
 
   return (
-    <div className="w-full rounded-2xl border border-[#CCCCCC] overflow-hidden bg-white">
-
+      <Card className="w-full rounded-2xl border p-0">
       {/* Header */}
-      <div className="bg-primary px-5 py-4 flex items-center justify-between">
-        <h2 className="text-white font-bold text-lg truncate pr-4">
+      <CardHeader className="bg-primary px-5 py-4 flex items-center justify-between">
+        <CardTitle className="text-white font-bold text-lg truncate pr-4">
           {post.title}
-        </h2>
+        </CardTitle>
 
         {isOwner && (
           <div className="flex items-start w-fit h-fit shrink-0">
@@ -46,20 +46,20 @@ export function PostCard({
             </Button>
           </div>
         )}
-      </div>
+      </CardHeader>
 
       {/* Body */}
-      <div className="px-6 py-4 flex flex-col gap-3">
+      <CardContent className="px-6 pb-8 flex flex-col gap-3">
         <div className="flex items-center justify-between">
-          <span className="font-bold text-sm">@{post.username}</span>
-          <span className="text-gray-400 text-sm">
+          <span className="font-bold text-muted-foreground text-sm">@{post.username}</span>
+          <span className="text-muted-foreground">
             {formatDistanceToNow(new Date(post.created_datetime), {
               addSuffix: true,
             })}
           </span>
         </div>
-        <p className="text-sm text-gray-800 leading-relaxed">{post.content}</p>
-      </div>
-    </div>
+        <p className="text-sm leading-relaxed">{post.content}</p>
+      </CardContent>
+    </Card>
   );
 }

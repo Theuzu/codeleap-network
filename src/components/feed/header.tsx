@@ -1,45 +1,45 @@
-'use client'
+"use client";
 
-import { useTheme } from 'next-themes'
-import { useUserStore } from '@/store/user'
-import { useRouter } from 'next/navigation'
-import { Sun, Moon, LogOut } from 'lucide-react'
+import { useTheme } from "next-themes";
+import { useUserStore } from "@/store/user";
+import { useRouter } from "next/navigation";
+import { Sun, Moon, LogOut } from "lucide-react";
+import { Button } from "../ui/button";
 
 export function Header() {
-  const { theme, setTheme } = useTheme()
-  const { clearUsername } = useUserStore()
-  const router = useRouter()
+  const { theme, setTheme } = useTheme();
+  const { clearUsername } = useUserStore();
+  const router = useRouter();
 
   function handleLogout() {
-    clearUsername()
-    router.replace('/')
+    clearUsername();
+    router.replace("/");
   }
 
   function toggleTheme() {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
+    setTheme(theme === "dark" ? "light" : "dark");
   }
 
   return (
-    <header className="w-full bg-[#7695EC] h-16 flex items-center px-8 fixed top-0 left-0 right-0 z-10">
-      <span className="text-white font-bold text-xl flex-1">CodeLeap Network</span>
-
-      <div className="flex items-center gap-4">
-        <button
+    <div className="w-full bg-primary h-16 flex items-center justify-between px-8">
+      <span className="text-white bg-primary font-bold text-xl">CodeLeap Network</span>
+      <div className="flex justify-around gap-4">
+        <Button
           onClick={toggleTheme}
-          className="text-white hover:opacity-70 transition-opacity"
+          className="bg-primary text-white hover:opacity-60 transition-opacity cursor-pointer"
           aria-label="Toggle theme"
         >
-          {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-        </button>
+          {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+        </Button>
 
-        <button
+        <Button
           onClick={handleLogout}
-          className="text-white hover:opacity-70 transition-opacity"
+          className="bg-primary text-white hover:opacity-70 transition-opacity cursor-pointer"
           aria-label="Logout"
         >
           <LogOut size={20} />
-        </button>
+        </Button>
       </div>
-    </header>
-  )
+    </div>
+  );
 }

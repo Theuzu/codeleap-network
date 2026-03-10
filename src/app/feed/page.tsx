@@ -1,5 +1,6 @@
 "use client";
 import { CreatePostForm } from "@/components/feed/CreatePostForm";
+import { Header } from "@/components/feed/header";
 import { PostList } from "@/components/feed/PostList";
 import { DeleteModal } from "@/components/modals/DeleteModal";
 import { EditModal } from "@/components/modals/EditModal";
@@ -18,10 +19,8 @@ export default function Feed() {
 
   return (
     <div className="min-h-screen bg-muted flex justify-center flex-col items-center">
-      <main className="w-full max-w-[800px] flex flex-col items-center bg-white min-h-screen">
-        <div className="w-full bg-primary h-16 flex items-center px-8">
-          <span className="text-white font-bold text-xl">CodeLeap Network</span>
-        </div>
+      <main className="w-full max-w-[800px] flex flex-col items-center bg-background min-h-screen">
+        <Header/>
 
         <div className="w-full flex flex-col gap-6 py-6 px-4">
           <CreatePostForm />
@@ -34,10 +33,8 @@ export default function Feed() {
         </div>
       </main>
 
-
-      {/* Calling The modal here */}
       <DeleteModal
-        post={postToDelete} //Is passed by posts component
+        post={postToDelete}
         onClose={() => setPostToDelete(null)}
       />
 

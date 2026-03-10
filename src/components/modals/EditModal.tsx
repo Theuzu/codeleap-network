@@ -43,6 +43,7 @@ export function EditModal({ post, onClose }: EditModalProps) {
           isPending={isPending}
           submitLabel="Save"
           pendingLabel="Saving..."
+          submitColor="bg-[#43A047] hover:bg-[#388E3C]" //custom color, following the figma design
         />
       </DialogContent>
     </Dialog>

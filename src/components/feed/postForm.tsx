@@ -15,6 +15,7 @@ type PostFormProps = {
   isPending: boolean;
   submitLabel: string;
   pendingLabel: string;
+  submitColor?: string;
 };
 
 export function PostForm({
@@ -24,6 +25,7 @@ export function PostForm({
   isPending,
   submitLabel,
   pendingLabel,
+  submitColor = "bg-primary hover:bg-primary/90", // Default values
 }: PostFormProps) {
   const {
     register,
@@ -46,18 +48,24 @@ export function PostForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="title" className="text-sm">Title</Label>
+        <Label htmlFor="title" className="text-sm">
+          Title
+        </Label>
         <Input
           id="title"
           placeholder="Hello world"
           className={cn("h-10 px-3 text-sm", errors.title && "border-red-500")}
           {...register("title")}
         />
-        {errors.title && <span className="text-xs text-red-500">{errors.title.message}</span>}
+        {errors.title && (
+          <span className="text-xs text-red-500">{errors.title.message}</span>
+        )}
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="content" className="text-sm">Content</Label>
+        <Label htmlFor="content" className="text-sm">
+          Content
+        </Label>
         <Textarea
           id="content"
           placeholder="Content here"
@@ -65,7 +73,9 @@ export function PostForm({
           className={cn("px-3 text-sm", errors.content && "border-red-500")}
           {...register("content")}
         />
-        {errors.content && <span className="text-xs text-red-500">{errors.content.message}</span>}
+        {errors.content && (
+          <span className="text-xs text-red-500">{errors.content.message}</span>
+        )}
       </div>
 
       <div className="flex justify-end gap-3">
@@ -85,7 +95,9 @@ export function PostForm({
           disabled={isDisabled}
           className={cn(
             "px-8 h-9 rounded-lg text-white text-sm font-semibold transition-all duration-200",
-            !isDisabled ? "bg-[#43A047] hover:bg-[#388E3C] cursor-pointer" : "bg-muted-foreground cursor-not-allowed"
+            !isDisabled
+              ? `${submitColor} cursor-pointer`
+              : "bg-muted-foreground cursor-not-allowed",
           )}
         >
           {isPending ? pendingLabel : submitLabel}

@@ -5,6 +5,7 @@ import { usePosts } from "@/hooks/usePosts";
 import { PostCard } from "./PostCard";
 import { Post } from "@/services/posts";
 import { PostSkeleton } from "./PostSkeleton";
+import { Card } from "../ui/card";
 
 type PostListProps = {
   currentUsername: string | null;
@@ -51,17 +52,17 @@ export function PostList({
 
   if (status === "error") {
     return (
-      <div className="w-full bg-white rounded-2xl border border-[#CCCCCC] p-6 text-center text-gray-500">
+      <Card className="w-full bg-background rounded-2xl border p-6 text-center">
         Failed to load posts. Please try again.
-      </div>
+      </Card>
     );
   }
 
   if (posts.length === 0) {
     return (
-      <div className="w-full bg-white rounded-2xl border border-[#CCCCCC] p-6 text-center text-gray-500">
+      <Card className="w-full bg-background rounded-2xl border p-6 text-center">
         No posts yet. Be the first to post!
-      </div>
+      </Card>
     );
   }
 
