@@ -4,7 +4,7 @@ import { useCreatePost } from "@/hooks/useCreatePost";
 import { useUserStore } from "@/store/user";
 import { PostFormSchema } from "@/app/schemas/post-schema";
 import { Card, CardContent, CardTitle } from "../ui/card";
-import { PostForm } from "./postForm";
+import { PostForm } from "./PostForm";
 
 export function CreatePostForm() {
   const { username } = useUserStore();

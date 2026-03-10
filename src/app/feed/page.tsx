@@ -1,6 +1,6 @@
 "use client";
 import { CreatePostForm } from "@/components/feed/CreatePostForm";
-import { Header } from "@/components/feed/header";
+import { Header } from "@/components/feed/Header";
 import { PostList } from "@/components/feed/PostList";
 import { ScrollToTopButton } from "@/components/feed/ScrollToTopButton";
 import { DeleteModal } from "@/components/modals/DeleteModal";

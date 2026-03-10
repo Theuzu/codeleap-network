@@ -9,7 +9,7 @@ import { useUpdatePost } from "@/hooks/useUpdatePost";
 import { Post } from "@/services/posts";
 
 import { PostFormSchema } from "@/app/schemas/post-schema";
-import { PostForm } from "../feed/postForm";
+import { PostForm } from "../feed/PostForm";
 
 type EditModalProps = {
   post: Post | null;
