@@ -13,12 +13,12 @@ export const usePosts = () => {
     queryFn: ({ pageParam = 0 }) => getPosts({ pageParam }),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
-      const currentTotalFetched = allPages.length * 10;
-      if (!lastPage.next || currentTotalFetched >= lastPage.count) {
+      const totalLoaded = allPages.reduce((acc, page) => acc + page.results.length, 0);
+      if (!lastPage.next || totalLoaded >= lastPage.count) {
         return undefined;
       }
 
-      return currentTotalFetched;
+      return totalLoaded;
     },
   });
 };
