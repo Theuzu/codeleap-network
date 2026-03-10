@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeProvider } from 'next-themes'
+
 import "./globals.css";
 import CoreProvider from "@/providers/core-provider";
 
@@ -28,7 +30,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <CoreProvider>{children}</CoreProvider>
+        <ThemeProvider>
+          <CoreProvider>{children}</CoreProvider>
+        </ThemeProvider>
+
       </body>
     </html>
   );
