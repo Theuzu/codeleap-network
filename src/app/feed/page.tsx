@@ -1,13 +1,19 @@
 "use client";
 import { CreatePostForm } from "@/components/feed/CreatePostForm";
 import { PostList } from "@/components/feed/PostList";
+import { DeleteModal } from "@/components/modals/DeleteModal";
+import { EditModal } from "@/components/modals/EditModal";
 
 import { Post } from "@/services/posts";
 import { useUserStore } from "@/store/user";
+import { useState } from "react";
 
 export default function Feed() {
   const { username } = useUserStore();
   console.log("user", username);
+
+  const [postToDelete, setPostToDelete] = useState<Post | null>(null)
+  const [postToEdit, setPostToEdit] = useState<Post | null>(null)
 
 
   return (
@@ -21,25 +27,24 @@ export default function Feed() {
           <CreatePostForm />
 
           <PostList
-            currentUsername={username} onDeleteClick={function (post: Post): void {
-              throw new Error("Function not implemented.");
-            } } onEditClick={function (post: Post): void {
-              throw new Error("Function not implemented.");
-            } }            // onDeleteClick={setPostToDelete}
-            // onEditClick={setPostToEdit}
+            currentUsername={username} 
+            onDeleteClick={setPostToDelete}
+            onEditClick={setPostToEdit}
           />
         </div>
       </main>
 
-      {/* <DeleteModal
-        post={postToDelete}
-        onClose={() => setPostToDelete(null)}
-      /> */}
 
-      {/* <EditModal
+      {/* Calling The modal here */}
+      <DeleteModal
+        post={postToDelete} //Is passed by posts component
+        onClose={() => setPostToDelete(null)}
+      />
+
+      <EditModal
         post={postToEdit}
         onClose={() => setPostToEdit(null)}
-      /> */}
+      />
     </div>
   );
 }

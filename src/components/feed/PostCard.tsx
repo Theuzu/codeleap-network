@@ -1,6 +1,7 @@
 import { Trash2, SquarePen } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { Post } from "@/services/posts";
+import { Button } from "../ui/button";
 
 type PostCardProps = {
   post: Post;
@@ -12,8 +13,8 @@ type PostCardProps = {
 export function PostCard({
   post,
   currentUsername,
-  // onDelete,
-  // onEdit
+  onDelete,
+  onEdit
 }: PostCardProps) {
   const isOwner = post.username === currentUsername;
 
@@ -21,28 +22,28 @@ export function PostCard({
     <div className="w-full rounded-2xl border border-[#CCCCCC] overflow-hidden bg-white">
 
       {/* Header */}
-      <div className="bg-primary px-6 py-4 flex items-center justify-between">
+      <div className="bg-primary px-5 py-4 flex items-center justify-between">
         <h2 className="text-white font-bold text-lg truncate pr-4">
           {post.title}
         </h2>
 
         {isOwner && (
-          <div className="flex items-center gap-4 shrink-0">
-            <button
-              //   onClick={() => onDelete(post)}
-              className="text-white hover:opacity-70 transition-opacity"
+          <div className="flex items-start w-fit h-fit shrink-0">
+            <Button
+              onClick={() => onDelete(post)}
+              className="text-white hover:opacity-70 transition-opacity cursor-pointer"
               aria-label="Delete post"
             >
-              <Trash2 size={20} /> 
+              <Trash2 size={25} /> 
               {/* This icon was the most similar one in lucide-react*/}
-            </button>
-            <button
-              //   onClick={() => onEdit(post)}
-              className="text-white hover:opacity-70 transition-opacity"
+            </Button>
+            <Button
+                onClick={() => onEdit(post)}
+              className="text-white hover:opacity-70 transition-opacity cursor-pointer"
               aria-label="Edit post"
             >
-              <SquarePen size={20} />
-            </button>
+              <SquarePen size={25} />
+            </Button>
           </div>
         )}
       </div>
