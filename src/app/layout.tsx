@@ -4,6 +4,7 @@ import { ThemeProvider } from 'next-themes'
 
 import "./globals.css";
 import CoreProvider from "@/providers/core-provider";
+import SmoothScroll from "@/components/Lenis/SmoothScroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +32,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <CoreProvider>{children}</CoreProvider>
+          <SmoothScroll>
+            <CoreProvider>{children}</CoreProvider>
+          </SmoothScroll>
         </ThemeProvider>
 
       </body>

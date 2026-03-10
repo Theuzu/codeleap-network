@@ -1,3 +1,19 @@
+/**
+ * The above code defines a React component called `PostList` that displays a list
+ * of posts with infinite scroll functionality and animations.
+ * @property {string | null} currentUsername - The `currentUsername` property in
+ * the `PostList` component is a string or `null` value that represents the
+ * username of the current user. It is used to determine if the current user is the
+ * author of a post and enable certain actions like editing or deleting the post.
+ * @property onDeleteClick - The `onDeleteClick` property in the `PostList`
+ * component is a function that takes a `Post` object as a parameter. This function
+ * is called when a user clicks on a delete button associated with a specific post
+ * in the list. The purpose of this function is to handle the deletion of the
+ * @property onEditClick - The `onEditClick` property in the `PostList` component
+ * is a function that is called when a user clicks on the edit button for a
+ * specific post. It takes a `Post` object as a parameter, representing the post
+ * that the user wants to edit.
+ */
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -6,6 +22,7 @@ import { PostCard } from "./PostCard";
 import { Post } from "@/services/posts";
 import { PostSkeleton } from "./PostSkeleton";
 import { Card } from "../ui/card";
+import { motion, AnimatePresence } from "framer-motion";
 
 type PostListProps = {
   currentUsername: string | null;
@@ -67,22 +84,31 @@ export function PostList({
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      {posts.map((post) => (
-        <PostCard
-          key={post.id}
-          post={post}
-          currentUsername={currentUsername}
-          onDelete={onDeleteClick}
-          onEdit={onEditClick}
-        />
-      ))}
-
-      <div ref={bottomRef} className="py-2 flex justify-center">
-        {isFetchingNextPage && (
-          <span className="text-sm text-gray-400">Loading more...</span>
-        )}
+    <AnimatePresence>
+      <div className="flex flex-col gap-6">
+        {posts.map((post, index) => (
+          <motion.div
+            key={post.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, x: -20, height: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.05 }}
+          >
+            <PostCard
+              key={post.id}
+              post={post}
+              currentUsername={currentUsername}
+              onDelete={onDeleteClick}
+              onEdit={onEditClick}
+            />
+          </motion.div>
+        ))}
+        <div ref={bottomRef} className="py-2 flex justify-center">
+          {isFetchingNextPage && (
+            <span className="text-sm text-gray-400">Loading more...</span>
+          )}
+        </div>
       </div>
-    </div>
+    </AnimatePresence>
   );
 }

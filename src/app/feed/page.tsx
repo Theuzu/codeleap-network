@@ -2,6 +2,7 @@
 import { CreatePostForm } from "@/components/feed/CreatePostForm";
 import { Header } from "@/components/feed/header";
 import { PostList } from "@/components/feed/PostList";
+import { ScrollToTopButton } from "@/components/feed/ScrollToTopButton";
 import { DeleteModal } from "@/components/modals/DeleteModal";
 import { EditModal } from "@/components/modals/EditModal";
 
@@ -13,35 +14,29 @@ export default function Feed() {
   const { username } = useUserStore();
   console.log("user", username);
 
-  const [postToDelete, setPostToDelete] = useState<Post | null>(null)
-  const [postToEdit, setPostToEdit] = useState<Post | null>(null)
-
+  const [postToDelete, setPostToDelete] = useState<Post | null>(null);
+  const [postToEdit, setPostToEdit] = useState<Post | null>(null);
 
   return (
     <div className="min-h-screen bg-muted flex justify-center flex-col items-center">
       <main className="w-full max-w-[800px] flex flex-col items-center bg-background min-h-screen">
-        <Header/>
+        <Header />
+        <ScrollToTopButton/>
 
         <div className="w-full flex flex-col gap-6 py-6 px-4">
           <CreatePostForm />
 
           <PostList
-            currentUsername={username} 
+            currentUsername={username}
             onDeleteClick={setPostToDelete}
             onEditClick={setPostToEdit}
           />
         </div>
       </main>
 
-      <DeleteModal
-        post={postToDelete}
-        onClose={() => setPostToDelete(null)}
-      />
+      <DeleteModal post={postToDelete} onClose={() => setPostToDelete(null)} />
 
-      <EditModal
-        post={postToEdit}
-        onClose={() => setPostToEdit(null)}
-      />
+      <EditModal post={postToEdit} onClose={() => setPostToEdit(null)} />
     </div>
   );
 }
