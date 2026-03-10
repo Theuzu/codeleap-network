@@ -20,14 +20,14 @@ export function CreatePostForm() {
 
   return (
     <Card className="w-full rounded-2xl border p-6">
-      <CardTitle className="font-bold text-lg mb-6">
+      <CardTitle className="font-bold text-lg mb-1">
         What's on your mind?
       </CardTitle>
       <CardContent>
         <PostForm
           onSubmit={onSubmit}
           isPending={isPending}
-          submitLabel="Create"
+          submitLabel="CREATE"
           pendingLabel="Creating..."
         />
       </CardContent>
