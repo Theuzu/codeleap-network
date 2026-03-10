@@ -8,9 +8,7 @@ import {
 import { useUpdatePost } from "@/hooks/useUpdatePost";
 import { Post } from "@/services/posts";
 
-import {
-  PostFormSchema,
-} from "@/app/schemas/post-schema";
+import { PostFormSchema } from "@/app/schemas/post-schema";
 import { PostForm } from "../feed/postForm";
 
 type EditModalProps = {
@@ -23,28 +21,29 @@ export function EditModal({ post, onClose }: EditModalProps) {
 
   function onSubmit(payload: PostFormSchema) {
     if (!post) return;
-    updatePost(
-      { id: post.id, payload },
-      { onSuccess: onClose }
-    );
+    updatePost({ id: post.id, payload }, { onSuccess: onClose });
   }
 
   return (
     <Dialog open={!!post} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className="flex flex-col min-h-fi h-[50vh] max-h-screen w-full sm:min-h-auto sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="font-bold text-base">Edit Item</DialogTitle>
         </DialogHeader>
-        
-        <PostForm
-          initialData={post ? { title: post.title, content: post.content } : undefined}
-          onSubmit={onSubmit}
-          onCancel={onClose}
-          isPending={isPending}
-          submitLabel="Save"
-          pendingLabel="Saving..."
-          submitColor="bg-[#43A047] hover:bg-[#388E3C]" //custom color, following the figma design
-        />
+
+        <div className="flex-1 overflow-y-auto">
+          <PostForm
+            initialData={
+              post ? { title: post.title, content: post.content } : undefined
+            }
+            onSubmit={onSubmit}
+            onCancel={onClose}
+            isPending={isPending}
+            submitLabel="Save"
+            pendingLabel="Saving..."
+            submitColor="bg-[#43A047] hover:bg-[#388E3C]"
+          />
+        </div>
       </DialogContent>
     </Dialog>
   );

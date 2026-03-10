@@ -31,7 +31,7 @@ export function DeleteModal({ post, onClose }: DeleteModalProps) {
     <AlertDialog open={isOpen} onOpenChange={onClose} >
         <AlertDialogContent className='min-w-fit'>
             <AlertDialogHeader>
-              <AlertDialogTitle className="font-bold text-base">
+              <AlertDialogTitle className="text-left font-bold text-base">
                 Are you sure you want to delete this item?
               </AlertDialogTitle>
             </AlertDialogHeader>
